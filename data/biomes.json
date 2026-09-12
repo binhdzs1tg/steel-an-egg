@@ -1,0 +1,278 @@
+{
+  "biomes": {
+    "grassland": {
+      "id": "grassland",
+      "name": "Grassland",
+      "required_speed": 0,
+      "ground_color": "#558B2F",
+      "sky_color": "#87CEEB",
+      "fog_color": "#C8E6C9",
+      "fog_density": 0.0,
+      "ambient_color": "#FFFFFF",
+      "ambient_energy": 0.8,
+      "size": 80,
+      "spawn_points": 6,
+      "egg_pool": [
+        {"egg_id": "grassland_basic", "weight": 80},
+        {"egg_id": "grassland_spotted", "weight": 18},
+        {"egg_id": "grassland_rare", "weight": 2}
+      ],
+      "npc_pool": [
+        {"npc_id": "grassland_guardian", "weight": 100}
+      ],
+      "npc_count": 2
+    },
+    "forest": {
+      "id": "forest",
+      "name": "Forest",
+      "required_speed": 50,
+      "ground_color": "#2E7D32",
+      "sky_color": "#A5D6A7",
+      "fog_color": "#81C784",
+      "fog_density": 0.05,
+      "ambient_color": "#C5E1A5",
+      "ambient_energy": 0.7,
+      "size": 100,
+      "spawn_points": 8,
+      "egg_pool": [
+        {"egg_id": "forest_common", "weight": 75},
+        {"egg_id": "forest_rare", "weight": 20},
+        {"egg_id": "forest_epic", "weight": 5}
+      ],
+      "npc_pool": [
+        {"npc_id": "forest_guardian", "weight": 100}
+      ],
+      "npc_count": 3
+    },
+    "desert": {
+      "id": "desert",
+      "name": "Desert",
+      "required_speed": 150,
+      "ground_color": "#FBC02D",
+      "sky_color": "#FFE082",
+      "fog_color": "#FFF8E1",
+      "fog_density": 0.02,
+      "ambient_color": "#FFF59D",
+      "ambient_energy": 1.0,
+      "size": 120,
+      "spawn_points": 7,
+      "egg_pool": [
+        {"egg_id": "desert_egg", "weight": 75},
+        {"egg_id": "desert_epic", "weight": 25}
+      ],
+      "npc_pool": [
+        {"npc_id": "desert_guardian", "weight": 100}
+      ],
+      "npc_count": 3
+    },
+    "snow": {
+      "id": "snow",
+      "name": "Snow",
+      "required_speed": 400,
+      "ground_color": "#ECEFF1",
+      "sky_color": "#B0BEC5",
+      "fog_color": "#E1F5FE",
+      "fog_density": 0.08,
+      "ambient_color": "#E0F7FA",
+      "ambient_energy": 0.9,
+      "size": 110,
+      "spawn_points": 8,
+      "egg_pool": [
+        {"egg_id": "snow_egg", "weight": 80},
+        {"egg_id": "snow_legendary", "weight": 20}
+      ],
+      "npc_pool": [
+        {"npc_id": "snow_guardian", "weight": 100}
+      ],
+      "npc_count": 4
+    },
+    "volcano": {
+      "id": "volcano",
+      "name": "Volcano",
+      "required_speed": 1000,
+      "ground_color": "#4E342E",
+      "sky_color": "#FF6F00",
+      "fog_color": "#BF360C",
+      "fog_density": 0.10,
+      "ambient_color": "#FF8A65",
+      "ambient_energy": 0.8,
+      "size": 100,
+      "spawn_points": 8,
+      "egg_pool": [
+        {"egg_id": "volcano_egg", "weight": 75},
+        {"egg_id": "volcano_mythic", "weight": 25}
+      ],
+      "npc_pool": [
+        {"npc_id": "volcano_guardian", "weight": 100}
+      ],
+      "npc_count": 4
+    },
+    "crystal_cave": {
+      "id": "crystal_cave",
+      "name": "Crystal Cave",
+      "required_speed": 2500,
+      "ground_color": "#6A1B9A",
+      "sky_color": "#4A148C",
+      "fog_color": "#7B1FA2",
+      "fog_density": 0.12,
+      "ambient_color": "#CE93D8",
+      "ambient_energy": 0.7,
+      "size": 80,
+      "spawn_points": 6,
+      "egg_pool": [
+        {"egg_id": "crystal_egg", "weight": 100}
+      ],
+      "npc_pool": [
+        {"npc_id": "crystal_guardian", "weight": 100}
+      ],
+      "npc_count": 5
+    },
+    "sky_island": {
+      "id": "sky_island",
+      "name": "Sky Island",
+      "required_speed": 5000,
+      "ground_color": "#FFFFFF",
+      "sky_color": "#87CEEB",
+      "fog_color": "#E1F5FE",
+      "fog_density": 0.03,
+      "ambient_color": "#FFFFFF",
+      "ambient_energy": 1.0,
+      "size": 90,
+      "spawn_points": 6,
+      "egg_pool": [
+        {"egg_id": "sky_egg", "weight": 100}
+      ],
+      "npc_pool": [
+        {"npc_id": "sky_guardian", "weight": 100}
+      ],
+      "npc_count": 5
+    },
+    "void": {
+      "id": "void",
+      "name": "Void",
+      "required_speed": 10000,
+      "ground_color": "#0D0D0D",
+      "sky_color": "#000000",
+      "fog_color": "#1A1A2E",
+      "fog_density": 0.15,
+      "ambient_color": "#311B92",
+      "ambient_energy": 0.5,
+      "size": 80,
+      "spawn_points": 6,
+      "egg_pool": [
+        {"egg_id": "void_egg", "weight": 90},
+        {"egg_id": "secret_egg", "weight": 10}
+      ],
+      "npc_pool": [
+        {"npc_id": "void_guardian", "weight": 100}
+      ],
+      "npc_count": 6
+    }
+  },
+  "npcs": {
+    "grassland_guardian": {
+      "id": "grassland_guardian",
+      "name": "Grassland Guardian",
+      "hp": 100,
+      "speed": 10,
+      "damage": 10,
+      "detect_range": 12,
+      "attack_range": 2,
+      "attack_cooldown": 1.5,
+      "color": "#558B2F",
+      "scale": 1.0,
+      "speed_penalty": 0.5
+    },
+    "forest_guardian": {
+      "id": "forest_guardian",
+      "name": "Forest Guardian",
+      "hp": 300,
+      "speed": 15,
+      "damage": 25,
+      "detect_range": 14,
+      "attack_range": 2.2,
+      "attack_cooldown": 1.3,
+      "color": "#2E7D32",
+      "scale": 1.1,
+      "speed_penalty": 0.5
+    },
+    "desert_guardian": {
+      "id": "desert_guardian",
+      "name": "Desert Guardian",
+      "hp": 700,
+      "speed": 20,
+      "damage": 40,
+      "detect_range": 16,
+      "attack_range": 2.5,
+      "attack_cooldown": 1.2,
+      "color": "#FBC02D",
+      "scale": 1.2,
+      "speed_penalty": 0.5
+    },
+    "snow_guardian": {
+      "id": "snow_guardian",
+      "name": "Snow Guardian",
+      "hp": 1500,
+      "speed": 22,
+      "damage": 60,
+      "detect_range": 16,
+      "attack_range": 2.5,
+      "attack_cooldown": 1.1,
+      "color": "#ECEFF1",
+      "scale": 1.3,
+      "speed_penalty": 0.5
+    },
+    "volcano_guardian": {
+      "id": "volcano_guardian",
+      "name": "Volcano Guardian",
+      "hp": 3000,
+      "speed": 30,
+      "damage": 100,
+      "detect_range": 18,
+      "attack_range": 3.0,
+      "attack_cooldown": 1.0,
+      "color": "#BF360C",
+      "scale": 1.4,
+      "speed_penalty": 0.5
+    },
+    "crystal_guardian": {
+      "id": "crystal_guardian",
+      "name": "Crystal Guardian",
+      "hp": 8000,
+      "speed": 35,
+      "damage": 200,
+      "detect_range": 20,
+      "attack_range": 3.0,
+      "attack_cooldown": 0.9,
+      "color": "#6A1B9A",
+      "scale": 1.5,
+      "speed_penalty": 0.5
+    },
+    "sky_guardian": {
+      "id": "sky_guardian",
+      "name": "Sky Guardian",
+      "hp": 15000,
+      "speed": 40,
+      "damage": 400,
+      "detect_range": 22,
+      "attack_range": 3.2,
+      "attack_cooldown": 0.85,
+      "color": "#FFFFFF",
+      "scale": 1.4,
+      "speed_penalty": 0.5
+    },
+    "void_guardian": {
+      "id": "void_guardian",
+      "name": "Void Guardian",
+      "hp": 20000,
+      "speed": 50,
+      "damage": 800,
+      "detect_range": 24,
+      "attack_range": 3.5,
+      "attack_cooldown": 0.7,
+      "color": "#1A1A2E",
+      "scale": 1.6,
+      "speed_penalty": 0.5
+    }
+  }
+}

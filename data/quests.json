@@ -1,0 +1,104 @@
+{
+  "quests": [
+    {
+      "id": "q_first_egg",
+      "name": "First Steps",
+      "description": "Collect your first egg from the wild.",
+      "objectives": [
+        {"type": "collect_egg", "target": 1, "current": 0}
+      ],
+      "rewards": {"money": 50, "speed_xp": 10},
+      "prerequisite": null
+    },
+    {
+      "id": "q_first_pet",
+      "name": "Hatchling",
+      "description": "Hatch your first pet at the base.",
+      "objectives": [
+        {"type": "hatch_pet", "target": 1, "current": 0}
+      ],
+      "rewards": {"money": 100, "speed_xp": 20},
+      "prerequisite": "q_first_egg"
+    },
+    {
+      "id": "q_earn_500",
+      "name": "Pocket Change",
+      "description": "Earn a total of $500 from your pets.",
+      "objectives": [
+        {"type": "earn_money", "target": 500, "current": 0}
+      ],
+      "rewards": {"money": 200, "speed_xp": 30},
+      "prerequisite": "q_first_pet"
+    },
+    {
+      "id": "q_speed_50",
+      "name": "Speedster I",
+      "description": "Reach Speed Level 50 to unlock the Forest.",
+      "objectives": [
+        {"type": "reach_speed", "target": 50, "current": 0}
+      ],
+      "rewards": {"money": 500, "speed_xp": 100},
+      "prerequisite": "q_earn_500"
+    },
+    {
+      "id": "q_collect_10_eggs",
+      "name": "Egg Collector",
+      "description": "Collect 10 eggs in total.",
+      "objectives": [
+        {"type": "collect_egg", "target": 10, "current": 0}
+      ],
+      "rewards": {"money": 300, "speed_xp": 50},
+      "prerequisite": "q_first_egg"
+    },
+    {
+      "id": "q_hatch_5_pets",
+      "name": "Pet Lover",
+      "description": "Hatch 5 pets.",
+      "objectives": [
+        {"type": "hatch_pet", "target": 5, "current": 0}
+      ],
+      "rewards": {"money": 1000, "speed_xp": 100},
+      "prerequisite": "q_first_pet"
+    },
+    {
+      "id": "q_enter_forest",
+      "name": "Into the Woods",
+      "description": "Step into the Forest biome for the first time.",
+      "objectives": [
+        {"type": "enter_biome", "target": 1, "current": 0, "biome": "forest"}
+      ],
+      "rewards": {"money": 500, "speed_xp": 100},
+      "prerequisite": "q_speed_50"
+    },
+    {
+      "id": "q_rare_pet",
+      "name": "Rare Find",
+      "description": "Obtain a pet of Rare rarity or higher.",
+      "objectives": [
+        {"type": "obtain_rarity", "target": 1, "current": 0, "min_rarity": "Rare"}
+      ],
+      "rewards": {"money": 2000, "speed_xp": 200},
+      "prerequisite": "q_first_pet"
+    },
+    {
+      "id": "q_money_10000",
+      "name": "Small Fortune",
+      "description": "Earn a total of $10,000.",
+      "objectives": [
+        {"type": "earn_money", "target": 10000, "current": 0}
+      ],
+      "rewards": {"money": 5000, "speed_xp": 500},
+      "prerequisite": "q_earn_500"
+    },
+    {
+      "id": "q_speed_500",
+      "name": "Speedster II",
+      "description": "Reach Speed Level 500 to unlock Snow biome.",
+      "objectives": [
+        {"type": "reach_speed", "target": 500, "current": 0}
+      ],
+      "rewards": {"money": 5000, "speed_xp": 1000},
+      "prerequisite": "q_speed_50"
+    }
+  ]
+}

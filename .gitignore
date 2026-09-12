@@ -1,0 +1,31 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+/builds/
+
+# Mono / C# (if used)
+.mono/
+data_*/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Export artifacts
+*.exe
+*.pck
+*.zip
+export_presets.cfg
+
+# Logs
+*.log
+
+# Local user data (only relevant on dev machine, but ignore if copied)
+user://
