@@ -14,7 +14,7 @@ var _entered: bool = false
 
 # Spawning positions are computed in _ready based on biome bounds
 var _spawned_eggs: Array[Node] = []
-var _guardian: Node = null
+var _guardian = null
 
 
 func _ready() -> void:
@@ -115,7 +115,7 @@ func _spawn_eggs() -> void:
 	for i in range(egg_ids.size()):
 		var eid: String = egg_ids[i]
 		var egg_scene: PackedScene = preload("res://scenes/Egg.tscn")
-		var egg: Node = egg_scene.instantiate()
+		var egg = egg_scene.instantiate()
 		egg.egg_id = eid
 		# Place egg in random spot within biome (avoid edges)
 		var x: float = rng.randf_range(-600, 600)
@@ -130,7 +130,7 @@ func _spawn_guardian() -> void:
 	if guardian_data.is_empty():
 		return
 	var g_scene: PackedScene = preload("res://scenes/Guardian.tscn")
-	var g: Node = g_scene.instantiate()
+	var g = g_scene.instantiate()
 	g.guardian_id = guardian_data["id"]
 	var y_mid: float = (float(_data["y_start"]) + float(_data["y_end"])) / 2.0
 	g.position = Vector2(0, y_mid)

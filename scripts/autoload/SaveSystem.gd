@@ -88,14 +88,14 @@ func delete_save() -> void:
 
 # ---------- Helpers ----------
 func _serialize_player() -> Dictionary:
-	var p: Node = GameManager.get_player()
+	var p = GameManager.get_player()
 	if p == null or not p.has_method("serialize"):
 		return {}
 	return p.serialize()
 
 
 func _serialize_world() -> Dictionary:
-	var w: Node = GameManager.get_world()
+	var w = GameManager.get_world()
 	if w == null or not w.has_method("serialize"):
 		return {}
 	return w.serialize()

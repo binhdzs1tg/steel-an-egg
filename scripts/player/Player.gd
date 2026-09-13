@@ -20,7 +20,7 @@ var is_running: bool = false
 var is_carrying_egg: bool = false
 var facing: Vector2 = Vector2.DOWN
 var _step_distance_accumulator: float = 0.0
-var _current_interactable: Node = null
+var _current_interactable = null
 var _invuln_timer: float = 0.0
 const INVULN_DURATION := 1.5
 
@@ -128,7 +128,7 @@ func _update_visuals() -> void:
 
 # ---------- Interaction ----------
 func _on_interact_area_entered(area: Area2D) -> void:
-	var owner_node: Node = area.get_parent()
+	var owner_node = area.get_parent()
 	if owner_node.has_method("get_interact_prompt"):
 		_current_interactable = owner_node
 		near_interactable.emit(owner_node.get_interact_prompt(self), owner_node)

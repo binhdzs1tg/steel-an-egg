@@ -25,7 +25,7 @@ func _build_world() -> void:
 		if biome_data.is_empty():
 			continue
 		var biome_scene := preload("res://scenes/world/Biome.tscn")
-		var biome: Node = biome_scene.instantiate()
+		var biome = biome_scene.instantiate()
 		biome.biome_id = biome_data["id"]
 		biome.position = Vector2.ZERO
 		add_child(biome)

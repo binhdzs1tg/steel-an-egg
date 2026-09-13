@@ -71,7 +71,7 @@ func _on_item_buy_pressed(uid: String) -> void:
 		_update_money()
 		# Special-case: if coop expansion increased, rebuild coop slots
 		if uid == "coop_size":
-			var base: Node = GameManager.get_world().get_base() if GameManager.get_world() != null else null
+			var base = GameManager.get_world().get_base() if GameManager.get_world() != null else null
 			if base != null and base.get_coop() != null and base.get_coop().has_method("_init_slots"):
 				# Re-init coop slots WITHOUT losing existing pets
 				# (handled by saving/loading in Coop.deserialize — we just expand capacity)

@@ -2,18 +2,14 @@
 ; Steal An Egg Simulator — Godot 4.3 project
 ; 2D Top-Down Egg Stealing Game
 ;
-; Engine: Godot 4.3.stable
-; Script: GDScript
-;
 [application]
 
 config/name="Steal An Egg Simulator"
 config/description="2D Top-Down Egg Stealing Simulator. Steal eggs, raise pets, earn money, upgrade, expand."
 run/main_scene="res://scenes/Main.tscn"
-config/features=StringArray("4.3", "GL Compatibility")
+config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 config/version="1.0.0"
-config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
@@ -32,53 +28,52 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep"
-window/handheld/orientation=0
 
 [input]
 
 move_up={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"keycode":87,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+"events": [Object(InputEventKey,"keycode":87,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false)
 ]
 }
 move_down={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"keycode":83,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+"events": [Object(InputEventKey,"keycode":83,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false)
 ]
 }
 move_left={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"keycode":65,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+"events": [Object(InputEventKey,"keycode":65,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false)
 ]
 }
 move_right={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"keycode":68,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"alt":false,"shift":false,"command":false)
+"events": [Object(InputEventKey,"keycode":68,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false)
 ]
 }
 interact={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"keycode":69,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+"events": [Object(InputEventKey,"keycode":69,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false)
 ]
 }
 run={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"keycode":4194325,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+"events": [Object(InputEventKey,"keycode":4194325,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false)
 ]
 }
 pause={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"keycode":4194305,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+"events": [Object(InputEventKey,"keycode":4194305,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false)
 ]
 }
 upgrade_menu={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"keycode":85,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+"events": [Object(InputEventKey,"keycode":85,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false)
 ]
 }
 toggle_minimap={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"keycode":77,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+"events": [Object(InputEventKey,"keycode":77,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false)
 ]
 }
 
