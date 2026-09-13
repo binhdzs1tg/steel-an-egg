@@ -38,7 +38,7 @@ func _build_items() -> void:
 	# Clear existing items
 	for c in container.get_children():
 		c.queue_free()
-	
+
 	var upgrades: Dictionary = DataRegistry.get_all_upgrades()
 	for uid in upgrades.keys():
 		var u: Dictionary = upgrades[uid]

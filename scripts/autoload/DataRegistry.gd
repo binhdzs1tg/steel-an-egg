@@ -29,7 +29,7 @@ func _ready() -> void:
 # ---------- Loaders ----------
 func _load_biomes() -> void:
 	var path := "res://data/biomes.json"
-	var data := _load_json(path)
+	var data: Variant = _load_json(path)
 	if data == null:
 		push_error("[DataRegistry] Failed to load biomes.json")
 		return
@@ -42,7 +42,7 @@ func _load_biomes() -> void:
 
 
 func _load_eggs() -> void:
-	var data := _load_json("res://data/eggs.json")
+	var data: Variant = _load_json("res://data/eggs.json")
 	if data == null:
 		push_error("[DataRegistry] Failed to load eggs.json")
 		return
@@ -56,7 +56,7 @@ func _load_eggs() -> void:
 
 
 func _load_guardians() -> void:
-	var data := _load_json("res://data/guardians.json")
+	var data: Variant = _load_json("res://data/guardians.json")
 	if data == null:
 		push_error("[DataRegistry] Failed to load guardians.json")
 		return
@@ -67,7 +67,7 @@ func _load_guardians() -> void:
 
 
 func _load_pets() -> void:
-	var data := _load_json("res://data/pets.json")
+	var data: Variant = _load_json("res://data/pets.json")
 	if data == null:
 		push_error("[DataRegistry] Failed to load pets.json")
 		return
@@ -78,7 +78,7 @@ func _load_pets() -> void:
 
 
 func _load_upgrades() -> void:
-	var data := _load_json("res://data/upgrades.json")
+	var data: Variant = _load_json("res://data/upgrades.json")
 	if data == null:
 		push_error("[DataRegistry] Failed to load upgrades.json")
 		return

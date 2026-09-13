@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/ui/UpgradeItem.gd" id="1_upgrade_item"]
 
-[node name="UpgradeItem" type="Control" parent="."]
+[node name="UpgradeItem" type="Control"]
 custom_minimum_size = Vector2(740, 80)
 script = ExtResource("1_upgrade_item")
 

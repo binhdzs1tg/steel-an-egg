@@ -31,7 +31,7 @@ func _build_background() -> void:
 	style.set_content_margin_all(4)
 	frame.add_theme_stylebox_override("panel", style)
 	add_child(frame)
-	
+
 	# Biome bands
 	for i in range(DataRegistry.get_biome_count()):
 		var bd: Dictionary = DataRegistry.get_biome_by_index(i)
@@ -48,7 +48,7 @@ func _build_background() -> void:
 		band.size = Vector2(MAP_WIDTH - 8, max_y - min_y)
 		add_child(band)
 		_biome_bands.append(band)
-		
+
 		# Biome label
 		var lbl := Label.new()
 		lbl.text = bd["name"]
@@ -56,7 +56,7 @@ func _build_background() -> void:
 		lbl.add_theme_font_size_override("font_size", 9)
 		lbl.position = Vector2(8, min_y + 2)
 		add_child(lbl)
-	
+
 	# Base marker (square at y=0)
 	_base_marker = Polygon2D.new()
 	_base_marker.polygon = PackedVector2Array([
@@ -65,7 +65,7 @@ func _build_background() -> void:
 	_base_marker.color = Color(0.4, 1.0, 0.4)
 	_base_marker.position = _world_to_map(Vector2(0, 0))
 	add_child(_base_marker)
-	
+
 	# Player dot
 	_player_dot = Polygon2D.new()
 	var n := 8
@@ -83,12 +83,12 @@ func _process(_delta: float) -> void:
 	if p == null:
 		return
 	_player_dot.position = _world_to_map(p.position)
-	
+
 	# Update guardian markers (we re-create them each frame for simplicity)
 	for m in _guardian_markers:
 		m.queue_free()
 	_guardian_markers.clear()
-	
+
 	var guardians: Array = get_tree().get_nodes_in_group("guardian")
 	for g in guardians:
 		var marker := Polygon2D.new()

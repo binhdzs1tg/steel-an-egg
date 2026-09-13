@@ -70,7 +70,7 @@ func _apply_visual() -> void:
 func _physics_process(delta: float) -> void:
 	if GameManager.is_paused():
 		return
-	
+
 	if _state == State.STUNNED:
 		_stun_timer -= delta
 		if _stun_timer <= 0.0:
@@ -79,14 +79,14 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(Vector2.ZERO, 800.0 * delta)
 		move_and_slide()
 		return
-	
+
 	var player: Node2D = GameManager.get_player()
 	if player == null:
 		return
-	
+
 	var to_player: Vector2 = player.position - position
 	var dist: float = to_player.length()
-	
+
 	match _state:
 		State.PATROL:
 			_patrol_state(delta, dist, to_player)
@@ -94,7 +94,7 @@ func _physics_process(delta: float) -> void:
 			_chase_state(delta, dist, to_player)
 		State.RETURN:
 			_return_state(delta)
-	
+
 	move_and_slide()
 	_update_visual_facing(to_player)
 

@@ -54,7 +54,7 @@ func _build_visual() -> void:
 	bg.z_index = -2
 	add_child(bg)
 	_slot_visuals.append(bg)
-	
+
 	# Draw roof
 	var roof := Polygon2D.new()
 	roof.polygon = PackedVector2Array([
@@ -65,7 +65,7 @@ func _build_visual() -> void:
 	roof.z_index = -1
 	add_child(roof)
 	_slot_visuals.append(roof)
-	
+
 	# Label
 	var label := Label.new()
 	label.text = "CHUỒNG"
@@ -75,7 +75,7 @@ func _build_visual() -> void:
 	label.z_index = 3
 	add_child(label)
 	_slot_visuals.append(label)
-	
+
 	# Draw hatch slots
 	var count: int = _slots.size()
 	var rows := ceil(count / float(SLOT_ROW_MAX))
@@ -217,7 +217,7 @@ func _build_visual_for_slot(idx: int) -> void:
 	egg_sprite.polygon = pts
 	egg_sprite.color = color
 	slot_node.add_child(egg_sprite)
-	
+
 	if slot["is_hatched"]:
 		# Show pet visual (color + larger)
 		var pet_color: Color = DataRegistry.color_from_hex(DataRegistry.get_pet(slot["pet_id"]).get("color", "#ffffff"))

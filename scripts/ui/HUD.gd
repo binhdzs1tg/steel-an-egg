@@ -22,15 +22,15 @@ func _ready() -> void:
 	GameManager.day_tick.connect(_on_day_tick)
 	GameManager.carried_egg_changed.connect(_on_carried_egg_changed)
 	GameManager.game_state_changed.connect(_on_game_state_changed)
-	
+
 	run_button.pressed.connect(_on_run_button_pressed)
 	upgrade_button.pressed.connect(_on_upgrade_button_pressed)
-	
+
 	# Update once at start
 	_update_speed_label()
 	_update_money_label()
 	_update_day_label()
-	
+
 	prompt_label.visible = false
 	chase_indicator.visible = false
 

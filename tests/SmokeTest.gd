@@ -43,7 +43,7 @@ func _run_tests() -> void:
 		var count: int = DataRegistry.upgrades.size()
 		_assert_eq(count, 5, "Expected 5 upgrades, got %d" % count)
 	)
-        
+
 	# Test 2: Biome ordering
 	_test("Biomes ordered by index", func():
 		for i in range(DataRegistry.biomes_by_index.size() - 1):
@@ -51,7 +51,7 @@ func _run_tests() -> void:
 			var b: int = int(DataRegistry.biomes_by_index[i + 1]["index"])
 			_assert_true(a < b, "Biome indices out of order at %d" % i)
 	)
-        
+
 	# Test 3: Eggs belong to valid biomes
 	_test("Eggs reference valid biomes", func():
 		for eid in DataRegistry.eggs.keys():
@@ -59,7 +59,7 @@ func _run_tests() -> void:
 			var bid: String = e["biome_id"]
 			_assert_true(DataRegistry.biomes.has(bid), "Egg %s has unknown biome %s" % [eid, bid])
 	)
-        
+
 	# Test 4: Pets reference valid eggs
 	_test("Pets reference valid eggs", func():
 		for pid in DataRegistry.pets.keys():
@@ -67,7 +67,7 @@ func _run_tests() -> void:
 			var eid: String = p["egg_id"]
 			_assert_true(DataRegistry.eggs.has(eid), "Pet %s references unknown egg %s" % [pid, eid])
 	)
-        
+
 	# Test 5: Guardians reference valid biomes
 	_test("Guardians reference valid biomes", func():
 		for gid in DataRegistry.guardians.keys():
@@ -75,13 +75,13 @@ func _run_tests() -> void:
 			var bid: String = g["biome_id"]
 			_assert_true(DataRegistry.biomes.has(bid), "Guardian %s has unknown biome %s" % [gid, bid])
 	)
-        
+
 	# Test 6: Each biome has a guardian
 	_test("Each biome has a guardian", func():
 		for bid in DataRegistry.biomes.keys():
 			_assert_true(DataRegistry.guardians_by_biome.has(bid), "Biome %s has no guardian" % bid)
 	)
-        
+
 	# Test 7: Economy default state
 	_test("Economy default money is 0", func():
 		_assert_eq(Economy.get_money(), 0, "Default money should be 0")
@@ -90,7 +90,7 @@ func _run_tests() -> void:
 		for uid in DataRegistry.upgrades.keys():
 			_assert_eq(Economy.get_upgrade_level(uid), 0, "Upgrade %s should start at level 0" % uid)
 	)
-        
+
 	# Test 8: Economy can add/spend money
 	_test("Economy add_money works", func():
 		Economy.add_money(100)
@@ -98,7 +98,7 @@ func _run_tests() -> void:
 		Economy.add_money(-50)
 		_assert_eq(Economy.get_money(), 50, "Money should be 50 after subtract")
 	)
-        
+
 	# Test 9: Upgrade cost progression
 	_test("Upgrade cost multiplies per level", func():
 		var lvl: int = Economy.get_upgrade_level("speed_level")
@@ -108,12 +108,12 @@ func _run_tests() -> void:
 		_assert_true(cost1 > cost0, "Upgrade cost should increase with level")
 		Economy.upgrade_levels["speed_level"] = lvl  # reset
 	)
-        
+
 	# Test 10: Pet slots
 	_test("Default pet slots = 3", func():
 		_assert_eq(Economy.get_max_pet_slots(), 3, "Default coop_size = 3 slots")
 	)
-        
+
 	# Test 11: Color parsing
 	_test("Color parsing #rrggbb", func():
 		var c: Color = DataRegistry.color_from_hex("#ff8800")
@@ -121,7 +121,7 @@ func _run_tests() -> void:
 		_assert_eq(round(c.g * 255), 136, "G should be 136")
 		_assert_eq(round(c.b * 255), 0, "B should be 0")
 	)
-        
+
 	# Test 12: Save system can serialize/deserialize
 	_test("SaveSystem roundtrip", func():
 		var state: Dictionary = Economy.serialize()
@@ -130,7 +130,7 @@ func _run_tests() -> void:
 		Economy.deserialize(state)
 		_assert_eq(Economy.get_money(), 50, "Money should restore to 50 after deserialize")
 	)
-        
+
 	print("")
 
 
