@@ -85,7 +85,7 @@ func add_speed_xp(amount: int) -> void:
                 NotificationSystem.notify("Speed Level Up! %d" % get_speed_level(), "speed", 2.0)
                 AudioManager.play_sfx("speed_level_up")
                 QuestSystem.progress_objective("reach_speed", get_speed_level())
-                needed = get_speed_xp_for_level(get_speed_level())
+                needed = DataRegistry.get_speed_xp_for_level(get_speed_level())
         _data["speed_xp"] = xp
         SaveSystem.mark_dirty()
         speed_changed.emit(get_speed_level(), get_speed_xp(), get_speed_xp_needed())

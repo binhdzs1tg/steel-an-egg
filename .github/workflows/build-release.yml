@@ -74,6 +74,17 @@ jobs:
       - name: Create export directory
         run: mkdir -p export
 
+      # 5b. Generate .godot/ cache trước khi export
+      #   Godot 4.x cần .godot/ cache để đăng ký class_name giữa các script.
+      #   Nếu không có cache này, các script tham chiếu class_name (như BiomeGate,
+      #   Player, NPC, Egg...) sẽ không parse được → EXE build vẫn "thành công"
+      #   nhưng crash ngay khi chạy do script rỗng/lỗi.
+      - name: Generate .godot cache (import)
+        run: |
+          ./godot --headless --import 2>&1 | tee import_log.txt || true
+          echo "=== Import finished ==="
+          ls -la .godot/ 2>/dev/null || echo "WARNING: .godot folder not created"
+
       # 6. Build Windows EXE
       - name: Export Windows Desktop (EXE)
         run: |
@@ -82,6 +93,13 @@ jobs:
             "export/${EXPORT_NAME}.exe" 2>&1 | tee export_log.txt
           echo "=== Export finished ==="
           ls -la export/
+          # Fail early nếu EXE quá nhỏ (dưới 10MB = có lẽ template bị thiếu)
+          EXE_SIZE=$(stat -c%s "export/${EXPORT_NAME}.exe" 2>/dev/null || echo 0)
+          echo "EXE size: ${EXE_SIZE} bytes"
+          if [ "${EXE_SIZE}" -lt 10000000 ]; then
+            echo "ERROR: EXE too small — export template may be missing or scripts failed to compile"
+            exit 1
+          fi
 
       # 7. Đính kèm EXE vào release
       #   - Trigger tự động từ release event: dùng tag từ event payload
@@ -94,10 +112,13 @@ jobs:
           fail_on_unmatched_files: true
 
       # 8. Upload log artifact để debug nếu cần
-      - name: Upload build log
+      - name: Upload build logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: build-log
-          path: export_log.txt
+          name: build-logs
+          path: |
+            export_log.txt
+            import_log.txt
           retention-days: 7
+          if-no-files-found: ignore

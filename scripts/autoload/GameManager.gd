@@ -142,7 +142,7 @@ func add_pet(pet_data: Dictionary) -> void:
         pet_inventory_changed.emit()
         AchievementSystem.increment_stat("pets_hatched", 1)
         # Collection updates
-        var was_new := Collection.register_pet(pet_data.get("pet_id", ""))
+        var was_new: bool = Collection.register_pet(pet_data.get("pet_id", ""))
         Collection.register_size(pet_data.get("size", "Normal"))
         Collection.register_mutation(pet_data.get("mutation", "Normal"))
         if was_new:
@@ -161,7 +161,7 @@ func add_pet(pet_data: Dictionary) -> void:
         if pet_data.get("mutation", "Normal") != "Normal":
                 AchievementSystem.increment_stat("mutations_found", 1)
         QuestSystem.increment_objective("hatch_pet", 1)
-        var rarity := pet_data.get("rarity", "Common")
+        var rarity: String = pet_data.get("rarity", "Common")
         if DataRegistry.get_rarity_tier(rarity) >= DataRegistry.get_rarity_tier("Rare"):
                 QuestSystem.increment_objective("obtain_rarity", 1, "", rarity)
 

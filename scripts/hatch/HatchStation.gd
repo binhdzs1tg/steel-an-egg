@@ -38,7 +38,8 @@ func _build_nodes() -> void:
         # Pillar
         var pillar := MeshInstance3D.new()
         var pillar_mesh := CylinderMesh.new()
-        pillar_mesh.radius = 0.2
+        pillar_mesh.top_radius = 0.2
+        pillar_mesh.bottom_radius = 0.2
         pillar_mesh.height = 1.2
         var pillar_mat := StandardMaterial3D.new()
         pillar_mat.albedo_color = Color(0.4, 0.35, 0.3)

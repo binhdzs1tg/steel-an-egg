@@ -208,19 +208,20 @@ func _perform_attack(p: Node) -> void:
                 p.apply_speed_penalty(speed_penalty_on_hit, 1.0)
         else:
                 # Fallback: just apply knockback
-                var knockback := (p.global_position - global_position).normalized() * 8.0
+                var knockback: Vector3 = (p.global_position - global_position).normalized() * 8.0
                 if p is CharacterBody3D:
                         (p as CharacterBody3D).velocity += knockback
         NotificationSystem.notify("Hit by %s! -%d speed for 2s" % [npc_data.get("name", "Guardian"), damage], "damage", 1.5)
         # Spawn damage VFX on the player
         if GameManager.player:
-                VFXBurst.spawn_at(GameManager.player.get_parent(), GameManager.player.global_position + Vector3(0, 1.0, 0), Color(1.0, 0.3, 0.3), 25, 0.1, 3.0, 0.6)
+                var vfx_script: GDScript = preload("res://scripts/autoload/VFXBurst.gd")
+                vfx_script.spawn_at(GameManager.player.get_parent(), GameManager.player.global_position + Vector3(0, 1.0, 0), Color(1.0, 0.3, 0.3), 25, 0.1, 3.0, 0.6)
         # Knockback
         if p is Player:
-                var knockback := (p.global_position - global_position)
-                knockback.y = 0
-                knockback = knockback.normalized() * 6.0
-                p.velocity += knockback
+                var knockback2: Vector3 = (p.global_position - global_position)
+                knockback2.y = 0
+                knockback2 = knockback2.normalized() * 6.0
+                p.velocity += knockback2
 
 
 func _update_health_bar() -> void:

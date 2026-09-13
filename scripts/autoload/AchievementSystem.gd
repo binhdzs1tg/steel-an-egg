@@ -52,7 +52,8 @@ func unlock(achievement_id: String) -> void:
         AudioManager.play_sfx("achievement")
         # Spawn VFX burst above the player
         if GameManager.player:
-                VFXBurst.spawn_at(GameManager.player.get_parent(), GameManager.player.global_position + Vector3(0, 2.5, 0), Color(1.0, 0.85, 0.3), 80, 0.2, 5.0, 2.0)
+                var vfx_script: GDScript = preload("res://scripts/autoload/VFXBurst.gd")
+                vfx_script.spawn_at(GameManager.player.get_parent(), GameManager.player.global_position + Vector3(0, 2.5, 0), Color(1.0, 0.85, 0.3), 80, 0.2, 5.0, 2.0)
 
 
 # Update a stat. Triggers achievement checks automatically.
