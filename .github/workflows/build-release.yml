@@ -1,9 +1,16 @@
 name: Build Windows EXE on Release
 
 # Tự động kích hoạt khi một bản phát hành được tạo (published)
+# Hoặc có thể trigger thủ công qua workflow_dispatch
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Tag của release để upload EXE lên (phải đã tồn tại)"
+        required: true
+        type: string
 
 # Quyền cần thiết để upload asset lên release
 permissions:
@@ -77,9 +84,12 @@ jobs:
           ls -la export/
 
       # 7. Đính kèm EXE vào release
+      #   - Trigger tự động từ release event: dùng tag từ event payload
+      #   - Trigger thủ công workflow_dispatch: dùng tag từ inputs.release_tag
       - name: Upload EXE to release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ github.event.release.tag_name || inputs.release_tag }}
           files: export/${{ env.EXPORT_NAME }}.exe
           fail_on_unmatched_files: true
 
