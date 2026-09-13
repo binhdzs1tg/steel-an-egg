@@ -1,0 +1,97 @@
+name: Build Windows EXE on Release
+
+# Tự động kích hoạt khi một bản phát hành được tạo (published)
+on:
+  release:
+    types: [published]
+
+# Quyền cần thiết để upload asset lên release
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    name: Build Windows EXE
+    runs-on: ubuntu-latest
+
+    env:
+      GODOT_VERSION: "4.7.2"
+      GODOT_RELEASE: "stable"
+      EXPORT_NAME: "SteelAnEgg"
+      EXPORT_PRESET: "Windows Desktop"
+
+    steps:
+      # 1. Checkout source code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2. Cài đặt dependencies cần thiết để chạy Godot headless
+      - name: Install Linux dependencies for Godot
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            unzip \
+            wget \
+            zip \
+            mesa-utils \
+            libgl1 \
+            libglu1-mesa \
+            libxrandr2 \
+            libxinerama1 \
+            libxcursor1 \
+            libxi6 \
+            libasound2 \
+            libpulse0 \
+            libfontconfig1 \
+            libfuse2
+
+      # 3. Tải Godot Engine 4.7.2 Linux headless binary
+      - name: Download Godot Engine ${{ env.GODOT_VERSION }}.${{ env.GODOT_RELEASE }}
+        run: |
+          GODOT_FILENAME="Godot_v${GODOT_VERSION}-${GODOT_RELEASE}_linux.x86_64"
+          wget -q "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-${GODOT_RELEASE}/${GODOT_FILENAME}.zip" -O godot.zip
+          unzip -q godot.zip
+          chmod +x "${GODOT_FILENAME}"
+          mv "${GODOT_FILENAME}" godot
+          ./godot --version
+
+      # 4. Tải và cài đặt export templates
+      - name: Download and install export templates
+        run: |
+          TEMPLATES_FILENAME="Godot_v${GODOT_VERSION}-${GODOT_RELEASE}_export_templates.tpz"
+          wget -q "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-${GODOT_RELEASE}/${TEMPLATES_FILENAME}" -O templates.tpz
+          unzip -q templates.tpz
+          mkdir -p "${HOME}/.local/share/godot/export_templates/${GODOT_VERSION}.${GODOT_RELEASE}"
+          mv templates/* "${HOME}/.local/share/godot/export_templates/${GODOT_VERSION}.${GODOT_RELEASE}/"
+          ls -la "${HOME}/.local/share/godot/export_templates/${GODOT_VERSION}.${GODOT_RELEASE}/"
+
+      # 5. Tạo thư mục export
+      - name: Create export directory
+        run: mkdir -p export
+
+      # 6. Build Windows EXE
+      - name: Export Windows Desktop (EXE)
+        run: |
+          ./godot --headless --verbose \
+            --export-release "${EXPORT_PRESET}" \
+            "export/${EXPORT_NAME}.exe" 2>&1 | tee export_log.txt
+          echo "=== Export finished ==="
+          ls -la export/
+
+      # 7. Đính kèm EXE vào release
+      - name: Upload EXE to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: export/${{ env.EXPORT_NAME }}.exe
+          fail_on_unmatched_files: true
+
+      # 8. Upload log artifact để debug nếu cần
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: export_log.txt
+          retention-days: 7

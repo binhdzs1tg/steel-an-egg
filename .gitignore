@@ -18,11 +18,14 @@ Thumbs.db
 *.swo
 *~
 
-# Export artifacts
+# Export artifacts (build output only)
 *.exe
 *.pck
 *.zip
-export_presets.cfg
+/export/
+
+# Note: export_presets.cfg IS committed so CI can build the project
+# (override the default Godot gitignore which excludes it)
 
 # Logs
 *.log
