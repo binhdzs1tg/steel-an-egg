@@ -41,10 +41,9 @@ func _build() -> void:
 	mat.hue_variation_max = 0.1
 	mat.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_SPHERE
 	mat.emission_sphere_radius = 0.3
-	mat.turbulence_enabled = true
-	mat.turbulence_noise_strength = 1.5
-	mat.turbulence_influence_min = 0.2
-	mat.turbulence_influence_max = 1.0
+	# Turbulence disabled: relatively expensive on the GPU and barely visible
+	# on a one-shot celebration burst.
+	mat.turbulence_enabled = false
 	particles.process_material = mat
 
 	# Mesh for particles (small spheres)
@@ -69,7 +68,6 @@ func _build() -> void:
 
 static func spawn_at(parent: Node, position: Vector3, color: Color, count: int = 60, size: float = 0.15, speed: float = 4.0, duration: float = 1.5) -> Node3D:
 	var vfx := VFXBurst.new()
-	vfx.set_script(preload("res://scripts/autoload/VFXBurst.gd"))
 	vfx.position = position
 	vfx.burst_color = color
 	vfx.burst_count = count

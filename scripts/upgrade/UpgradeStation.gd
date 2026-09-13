@@ -6,6 +6,8 @@ class_name UpgradeStation
 @export var upgrade_id: String = "speed"
 
 var prompt_label: Label3D
+var _orb: MeshInstance3D = null
+var _last_prompt_text: String = ""
 
 
 func _ready() -> void:
@@ -53,14 +55,11 @@ func _build_nodes() -> void:
         orb.position = Vector3(0, 1.4, 0)
         orb.name = "Orb"
         add_child(orb)
+        _orb = orb
 
-        # Light
-        var light := OmniLight3D.new()
-        light.light_color = _upgrade_color(upgrade_id)
-        light.light_energy = 0.6
-        light.omni_range = 3.0
-        light.position = Vector3(0, 1.4, 0)
-        add_child(light)
+        # Light removed for performance: the emissive orb already conveys the
+        # upgrade color. 6 permanent omni lights around the Base cost a lot of
+        # fill-rate in the Forward+ renderer for no visual benefit.
 
         # Prompt label
         prompt_label = Label3D.new()
@@ -95,23 +94,29 @@ func _upgrade_color(uid: String) -> Color:
 
 
 func _process(_delta: float) -> void:
-        # Update prompt with current cost
+        # Bob orb (cheap, always run)
+        if _orb:
+                _orb.position.y = 1.4 + sin(Time.get_ticks_msec() * 0.003) * 0.08
+                _orb.rotation.y += _delta * 1.5
+        # Update prompt ONLY when the text actually changed. Re-assigning
+        # Label3D.text regenerates the text mesh; doing it 60x/s per station
+        # (x6 stations) was a needless per-frame cost.
         var lvl := Economy.get_upgrade_level(upgrade_id)
         var max_lvl := Economy.get_upgrade_max_level(upgrade_id)
-        var def: Dictionary = DataRegistry.get_upgrade_def(upgrade_id)
-        var display_name: String = def.get("name", upgrade_id)
+        var text: String
+        var can_afford := false
         if lvl >= max_lvl:
-                prompt_label.text = "%s MAX" % display_name
-                return
-        var cost := Economy.get_upgrade_cost(upgrade_id)
-        var can_afford := Economy.get_money() >= cost
-        prompt_label.text = "%s Lv.%d\n$%d\n[E] %s" % [display_name, lvl, cost, "BUY" if can_afford else "Can't afford"]
-        prompt_label.modulate = Color(1, 1, 1) if can_afford else Color(0.7, 0.5, 0.5)
-        # Bob orb
-        var orb := get_node_or_null("Orb")
-        if orb:
-                orb.position.y = 1.4 + sin(Time.get_ticks_msec() * 0.003) * 0.08
-                orb.rotation.y += _delta * 1.5
+                var def_max: Dictionary = DataRegistry.get_upgrade_def(upgrade_id)
+                text = "%s MAX" % def_max.get("name", upgrade_id)
+        else:
+                var def: Dictionary = DataRegistry.get_upgrade_def(upgrade_id)
+                var cost := Economy.get_upgrade_cost(upgrade_id)
+                can_afford = Economy.get_money() >= cost
+                text = "%s Lv.%d\n$%d\n[E] %s" % [def.get("name", upgrade_id), lvl, cost, "BUY" if can_afford else "Can't afford"]
+        if text != _last_prompt_text:
+                _last_prompt_text = text
+                prompt_label.text = text
+                prompt_label.modulate = Color(1, 1, 1) if can_afford else Color(0.7, 0.5, 0.5)
 
 
 func get_prompt_text() -> String:
