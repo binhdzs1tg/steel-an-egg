@@ -28,24 +28,20 @@ jobs:
           fetch-depth: 0
 
       # 2. Cài đặt dependencies cần thiết để chạy Godot headless
+      #   Ubuntu 24.04 đổi tên libasound2 -> libasound2t64, libpulse0 -> libpulse0t64,
+      #   nên ta cài với fallback để workflow chạy được trên mọi phiên bản runner.
       - name: Install Linux dependencies for Godot
         run: |
           sudo apt-get update
+          sudo apt-get install -y unzip wget zip libfontconfig1 libfuse2 || true
+          # Audio libs có thể đổi tên theo time64 transition
+          sudo apt-get install -y libasound2 libpulse0 || \
+            sudo apt-get install -y libasound2t64 libpulse0t64 || true
+          # X11 / GL libs (không bắt buộc cho headless export nhưng giúp tương thích)
           sudo apt-get install -y \
-            unzip \
-            wget \
-            zip \
-            mesa-utils \
-            libgl1 \
-            libglu1-mesa \
-            libxrandr2 \
-            libxinerama1 \
-            libxcursor1 \
-            libxi6 \
-            libasound2 \
-            libpulse0 \
-            libfontconfig1 \
-            libfuse2
+            libgl1 libglu1-mesa \
+            libxrandr2 libxinerama1 libxcursor1 libxi6 || true
+          echo "Dependencies install step completed."
 
       # 3. Tải Godot Engine 4.7.2 Linux headless binary
       - name: Download Godot Engine ${{ env.GODOT_VERSION }}.${{ env.GODOT_RELEASE }}
