@@ -203,6 +203,7 @@ func _move_toward(target: Vector3, move_speed: float, delta: float) -> void:
 
 func _perform_attack(p: Node) -> void:
         # Push player back and apply speed penalty (visual: flash)
+        AudioManager.play_sfx("damage")
         if p.has_method("apply_speed_penalty"):
                 p.apply_speed_penalty(speed_penalty_on_hit, 1.0)
         else:
@@ -211,9 +212,11 @@ func _perform_attack(p: Node) -> void:
                 if p is CharacterBody3D:
                         (p as CharacterBody3D).velocity += knockback
         NotificationSystem.notify("Hit by %s! -%d speed for 2s" % [npc_data.get("name", "Guardian"), damage], "damage", 1.5)
-        # Could deduct money as penalty instead; here we just slow the player.
+        # Spawn damage VFX on the player
+        if GameManager.player:
+                VFXBurst.spawn_at(GameManager.player.get_parent(), GameManager.player.global_position + Vector3(0, 1.0, 0), Color(1.0, 0.3, 0.3), 25, 0.1, 3.0, 0.6)
+        # Knockback
         if p is Player:
-                # Knockback
                 var knockback := (p.global_position - global_position)
                 knockback.y = 0
                 knockback = knockback.normalized() * 6.0

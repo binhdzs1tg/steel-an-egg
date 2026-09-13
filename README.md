@@ -22,6 +22,34 @@ You explore the world, collect eggs, carry them back to your base, hatch them in
 | **Shift Lock** | Hold **Shift** | Camera locks behind shoulder, crosshair appears, mouse rotates the character. Release Shift to exit. |
 | **1st-person** | Scroll wheel forward past threshold | Camera enters the head; body hidden. Scroll back out to exit. |
 
+Additional camera features:
+- **Camera shake** on damage and rare+ hatches (toggleable in Settings)
+- **Smooth zoom** between 0.4 and 9.0 distance
+- **Spring arm collision** so camera never clips through walls
+
+## 🔊 Audio System
+
+All audio is **procedurally synthesized** in code — no external audio files needed:
+- **Ambient music**: continuous pad with arpeggio (AudioStreamGenerator)
+- **SFX**: 16 one-shot sound effects synthesized as 16-bit WAV (egg pickup, hatch crack, pet appear by rarity tier, money tick, upgrade buy, speed level up, quest complete, achievement, biome unlock, damage, UI click/hover)
+- **Volume sliders** for music and SFX (saved in settings)
+
+## ✨ VFX System
+
+- **GPUParticles3D** bursts on rare+ hatches, achievements, and damage
+- Particle count, color, size, and speed scale with **rarity tier**
+- Mutation color tints the pet mesh via emission
+- Egg glow intensity based on rarity
+
+## 🗺️ Minimap
+
+A bottom-left minimap shows:
+- Player position (cyan dot with direction arrow)
+- Base (green dot at center)
+- Unlocked biome gates (yellow dots)
+- Nearby eggs within range (orange dots)
+- NPCs (red dots, brighter when chasing/attacking)
+
 ## 🕹️ Controls
 
 | Action | Key |
@@ -38,7 +66,7 @@ You explore the world, collect eggs, carry them back to your base, hatch them in
 | Open Collection | C |
 | Open Upgrades | U |
 | Open Quests | Q |
-| Pause / close menus | Esc |
+| Pause / Settings | Esc |
 
 ## 🗺️ World Layout
 
@@ -85,6 +113,8 @@ steel-an-egg/
 │   ├── autoload/           # Singletons
 │   │   ├── GameManager.gd       # World/player refs, biome switching, egg/pet inventory
 │   │   ├── SaveSystem.gd        # JSON save + backup + auto-save + offline earnings
+│   │   ├── AudioManager.gd      # Procedural SFX + ambient music synthesis
+│   │   ├── VFXBurst.gd          # Particle burst factory (one-shot, auto-free)
 │   │   ├── Economy.gd           # Money, speed, upgrades, pet income
 │   │   ├── Collection.gd        # Pet/Size/Mutation index
 │   │   ├── QuestSystem.gd       # Quest definitions + tracking + rewards
@@ -92,7 +122,7 @@ steel-an-egg/
 │   │   ├── NotificationSystem.gd # Toast notifications + activity log
 │   │   ├── DataRegistry.gd      # JSON data loader + weighted rolls
 │   │   └── InputMapHelper.gd    # Centralized input reader
-│   ├── player/Player.gd    # Player + 3-mode camera (3P/Shift-Lock/1P)
+│   ├── player/Player.gd    # Player + 3-mode camera + camera shake
 │   ├── world/
 │   │   ├── Main.gd         # World root, builds biomes + base + player + HUD
 │   │   ├── Biome.gd        # Biome region (ground/sky/spawn points/NPCs/gate)
@@ -100,18 +130,23 @@ steel-an-egg/
 │   │   └── EggSpawnPoint.gd # Egg spawner with respawn timer
 │   ├── egg/Egg.gd          # Pickable egg in the world
 │   ├── pet/PetVisual.gd    # Visual representation of a pet
-│   ├── hatch/HatchStation.gd # 7-stage hatch animation
+│   ├── hatch/HatchStation.gd # 7-stage hatch animation + VFX + SFX
 │   ├── npc/NPC.gd          # Patrol/Detect/Chase/Attack/Return state machine
 │   ├── base/
 │   │   ├── Base.gd         # Player base (hatch/treadmill/upgrades/display)
-│   │   └── Treadmill.gd    # Active speed-XP training station
+│   │   ├── Treadmill.gd    # Active speed-XP training station
+│   │   └── PetDisplayArea.gd # Showcase top-6 pets by income
 │   ├── upgrade/UpgradeStation.gd # Buy upgrades
 │   └── ui/
-│       ├── HUD.gd              # In-game overlay + crosshair
+│       ├── HUD.gd              # In-game overlay + crosshair + minimap + XP bar
 │       ├── InventoryMenu.gd    # Egg inventory
 │       ├── CollectionMenu.gd  # Pet/Size/Mutation/Biome index
 │       ├── UpgradeMenu.gd     # Upgrade shop
-│       └── QuestMenu.gd       # Quest log
+│       ├── QuestMenu.gd       # Quest log
+│       ├── PauseMenu.gd       # Pause overlay (resume/save/settings/quit)
+│       ├── SettingsMenu.gd    # Volume sliders + camera shake toggle
+│       ├── SpeedXPBar.gd      # Speed XP progress bar
+│       └── Minimap.gd         # Top-down 2D minimap
 └── data/
     ├── eggs.json           # 16 egg definitions
     ├── pets.json           # 30 pet definitions

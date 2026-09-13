@@ -164,6 +164,28 @@ func _setup_ui() -> void:
                         3: bar.position = Vector2(6, -1)     # right
                 crosshair.add_child(bar)
 
+        # Speed XP bar (bottom-center)
+        var xp_bar_script: GDScript = preload("res://scripts/ui/SpeedXPBar.gd")
+        var xp_bar: Control = xp_bar_script.new() as Control
+        xp_bar.name = "SpeedXPBar"
+        add_child(xp_bar)
+        xp_bar._setup_ui()
+
+        # Minimap (bottom-left, above log)
+        var minimap_script: GDScript = preload("res://scripts/ui/Minimap.gd")
+        var minimap: Control = minimap_script.new() as Control
+        minimap.name = "Minimap"
+        add_child(minimap)
+        minimap._setup_ui()
+
+        # Pause menu (Esc) - sibling CanvasLayer
+        var pause_script: GDScript = preload("res://scripts/ui/PauseMenu.gd")
+        var pause_menu: CanvasLayer = pause_script.new() as CanvasLayer
+        pause_menu.name = "PauseMenu"
+        pause_menu.visible = false
+        add_child(pause_menu)
+        pause_menu._setup_ui()
+
         # Hook signals
         Economy.money_changed.connect(_on_money_changed)
         Economy.speed_changed.connect(_on_speed_changed)
@@ -218,7 +240,16 @@ func _unhandled_input(event: InputEvent) -> void:
         elif event.is_action_pressed("quests"):
                 _toggle_menu(quest_menu)
         elif event.is_action_pressed("pause"):
-                _close_all_menus()
+                # Toggle pause menu
+                var pause := get_node_or_null("PauseMenu")
+                if pause:
+                        if pause.visible:
+                                pause._on_resume()
+                        else:
+                                _close_all_menus()
+                                pause.visible = true
+                                get_tree().paused = true
+                                AudioManager.play_sfx("ui_click")
 
 
 func _toggle_menu(menu: Control) -> void:

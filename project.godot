@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 DataRegistry="*res://scripts/autoload/DataRegistry.gd"
 SaveSystem="*res://scripts/autoload/SaveSystem.gd"
+AudioManager="*res://scripts/autoload/AudioManager.gd"
 Economy="*res://scripts/autoload/Economy.gd"
 Collection="*res://scripts/autoload/Collection.gd"
 QuestSystem="*res://scripts/autoload/QuestSystem.gd"
