@@ -1,0 +1,64 @@
+{
+  "upgrades": [
+    {
+      "id": "speed_level",
+      "name": "Tốc Độ Di Chuyển",
+      "name_en": "Move Speed",
+      "description": "Tăng tốc độ di chuyển cơ bản. Càng cao càng dễ chạy trốn.",
+      "base_cost": 50,
+      "cost_multiplier": 1.5,
+      "base_value": 100,
+      "increment_per_level": 15,
+      "max_level": 20,
+      "icon": "speed"
+    },
+    {
+      "id": "carry_capacity",
+      "name": "Sức Chịu Trứng",
+      "name_en": "Carry Capacity",
+      "description": "Giảm ảnh hưởng tốc độ khi mang trứng.",
+      "base_cost": 80,
+      "cost_multiplier": 1.6,
+      "base_value": 0.85,
+      "increment_per_level": 0.03,
+      "max_level": 10,
+      "icon": "carry"
+    },
+    {
+      "id": "coop_size",
+      "name": "Mở Rộng Chuồng",
+      "name_en": "Coop Expansion",
+      "description": "Tăng số lượng sinh vật có thể nuôi cùng lúc.",
+      "base_cost": 200,
+      "cost_multiplier": 2.0,
+      "base_value": 3,
+      "increment_per_level": 2,
+      "max_level": 10,
+      "icon": "coop"
+    },
+    {
+      "id": "hatch_speed",
+      "name": "Tốc Độ Ấp",
+      "name_en": "Hatch Speed",
+      "description": "Giảm thời gian ấp trứng.",
+      "base_cost": 150,
+      "cost_multiplier": 1.7,
+      "base_value": 1.0,
+      "increment_per_level": -0.1,
+      "max_level": 8,
+      "icon": "hatch"
+    },
+    {
+      "id": "income_multiplier",
+      "name": "Bộ Nhân Thu Nhập",
+      "name_en": "Income Boost",
+      "description": "Tăng thu nhập từ tất cả sinh vật.",
+      "base_cost": 300,
+      "cost_multiplier": 2.2,
+      "base_value": 1.0,
+      "increment_per_level": 0.25,
+      "max_level": 10,
+      "icon": "income"
+    }
+  ]
+}

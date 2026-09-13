@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7a8d1f2c3d4e"]
+
+[ext_resource type="Script" path="res://scripts/world/Main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://scenes/world/World.tscn" id="2_world"]
+[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="3_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/PauseMenu.tscn" id="4_pause"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="World" parent="." instance=ExtResource("2_world")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="HUD" parent="." instance=ExtResource("3_hud")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_pause")]

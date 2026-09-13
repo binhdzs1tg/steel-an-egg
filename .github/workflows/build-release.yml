@@ -1,0 +1,73 @@
+name: Build Windows EXE
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git user
+        run: |
+          git config --global user.name "binhdzs1tg"
+          git config --global user.email "binhdzs1tg@users.noreply.github.com"
+
+      - name: Setup Godot 4.3
+        run: |
+          wget -q https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip -O godot.zip
+          unzip -q godot.zip -d godot-bin
+          chmod +x godot-bin/Godot_v4.3-stable_linux.x86_64
+          # Export templates
+          mkdir -p ~/.local/share/godot/export_templates/4.3.stable
+          wget -q https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz -O templates.tpz
+          unzip -q templates.tpz -d /tmp/templates_extract
+          cp -r /tmp/templates_extract/templates/* ~/.local/share/godot/export_templates/4.3.stable/
+          # Verify install
+          ./godot-bin/Godot_v4.3-stable_linux.x86_64 --version || true
+
+      - name: Import project (pre-build cache)
+        run: |
+          # Run headless import to generate .godot/ cache
+          ./godot-bin/Godot_v4.3-stable_linux.x86_64 --headless --import --editor 2>&1 | tail -30 || true
+
+      - name: Export Windows EXE
+        run: |
+          mkdir -p export
+          ./godot-bin/Godot_v4.3-stable_linux.x86_64 --headless --export-release "Windows Desktop" export/StealAnEgg-Windows.exe 2>&1 | tee export_log.txt || true
+          # Show what got produced
+          ls -la export/ || true
+          cat export_log.txt | tail -50
+
+      - name: Package release
+        run: |
+          cd export
+          zip -r StealAnEgg-Windows.zip . -x "*.log"
+          ls -la
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: StealAnEgg-Windows
+          path: export/StealAnEgg-Windows.zip
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: export/StealAnEgg-Windows.zip
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

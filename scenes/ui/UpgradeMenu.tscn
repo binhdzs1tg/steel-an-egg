@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://u4p5g6r7a8d9e0"]
+
+[ext_resource type="Script" path="res://scripts/ui/UpgradeMenu.gd" id="1_upgrade_menu"]
+
+[node name="UpgradeMenu" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+process_mode = 3
+script = ExtResource("1_upgrade_menu")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 240.0
+offset_top = 80.0
+offset_right = 1040.0
+offset_bottom = 640.0
+
+[node name="Title" type="Label" parent="Panel"]
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 784.0
+offset_bottom = 44.0
+text = "NANG CAP"
+horizontal_alignment = 1
+
+[node name="MoneyLabel" type="Label" parent="Panel"]
+offset_left = 16.0
+offset_top = 504.0
+offset_right = 500.0
+offset_bottom = 528.0
+text = "So du: 0 $"
+
+[node name="CloseButton" type="Button" parent="Panel"]
+offset_left = 600.0
+offset_top = 498.0
+offset_right = 768.0
+offset_bottom = 538.0
+text = "Dong [Esc]"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+offset_left = 16.0
+offset_top = 60.0
+offset_right = 784.0
+offset_bottom = 490.0
+
+[node name="VBox" type="VBoxContainer" parent="Panel/ScrollContainer"]
+custom_minimum_size = Vector2(760, 0)
+size_flags_horizontal = 3
+size_flags_vertical = 3

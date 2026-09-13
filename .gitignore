@@ -1,0 +1,32 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+/builds/
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono / C# specific (not used here, but ignore just in case)
+.mono/
+data_*/
+mono_crash.*.json
+
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editor files
+*.tmp
+.vscode/
+.idea/
+
+# Build artifacts (we keep export_presets.cfg, but ignore actual exports)
+export/
+*.exe
+*.pdb
+*.apk
+*.aab
+*.keystore

@@ -1,0 +1,160 @@
+{
+  "eggs": [
+    {
+      "id": "egg_playground_small",
+      "biome_id": "playground",
+      "name": "Trứng Ngỗng",
+      "name_en": "Goose Egg",
+      "value": 25,
+      "hatch_time": 30.0,
+      "pet_id": "pet_goose",
+      "size": 18,
+      "color": "#fff8dc",
+      "carry_speed_penalty": 0.85
+    },
+    {
+      "id": "egg_playground_medium",
+      "biome_id": "playground",
+      "name": "Trứng Ngỗng Lớn",
+      "name_en": "Large Goose Egg",
+      "value": 45,
+      "hatch_time": 45.0,
+      "pet_id": "pet_goose_golden",
+      "size": 22,
+      "color": "#ffe890",
+      "carry_speed_penalty": 0.75
+    },
+    {
+      "id": "egg_playground_rare",
+      "biome_id": "playground",
+      "name": "Trứng Ngỗng Vàng",
+      "name_en": "Golden Goose Egg",
+      "value": 80,
+      "hatch_time": 60.0,
+      "pet_id": "pet_goose_golden",
+      "size": 26,
+      "color": "#ffd700",
+      "carry_speed_penalty": 0.65
+    },
+    {
+      "id": "egg_foreast_common",
+      "biome_id": "forest",
+      "name": "Trứng Gấu",
+      "name_en": "Bear Egg",
+      "value": 120,
+      "hatch_time": 90.0,
+      "pet_id": "pet_bear",
+      "size": 24,
+      "color": "#a87544",
+      "carry_speed_penalty": 0.70
+    },
+    {
+      "id": "egg_forest_medium",
+      "biome_id": "forest",
+      "name": "Trứng Gấu Nâu",
+      "name_en": "Brown Bear Egg",
+      "value": 180,
+      "hatch_time": 120.0,
+      "pet_id": "pet_bear_brown",
+      "size": 28,
+      "color": "#6b4423",
+      "carry_speed_penalty": 0.60
+    },
+    {
+      "id": "egg_forest_rare",
+      "biome_id": "forest",
+      "name": "Trứng Gấu Polar",
+      "name_en": "Polar Bear Egg",
+      "value": 260,
+      "hatch_time": 150.0,
+      "pet_id": "pet_bear_polar",
+      "size": 32,
+      "color": "#e0e8f0",
+      "carry_speed_penalty": 0.55
+    },
+    {
+      "id": "egg_desert_common",
+      "biome_id": "desert",
+      "name": "Trứng Hổ",
+      "name_en": "Tiger Egg",
+      "value": 350,
+      "hatch_time": 180.0,
+      "pet_id": "pet_tiger",
+      "size": 26,
+      "color": "#ff8c1a",
+      "carry_speed_penalty": 0.65
+    },
+    {
+      "id": "egg_desert_medium",
+      "biome_id": "desert",
+      "name": "Trứng Hổ Trắng",
+      "name_en": "White Tiger Egg",
+      "value": 500,
+      "hatch_time": 210.0,
+      "pet_id": "pet_tiger_white",
+      "size": 30,
+      "color": "#f0f0e0",
+      "carry_speed_penalty": 0.55
+    },
+    {
+      "id": "egg_desert_rare",
+      "biome_id": "desert",
+      "name": "Trứng Hổ Saber",
+      "name_en": "Saber Tiger Egg",
+      "value": 720,
+      "hatch_time": 240.0,
+      "pet_id": "pet_tiger_saber",
+      "size": 34,
+      "color": "#c8a060",
+      "carry_speed_penalty": 0.50
+    },
+    {
+      "id": "egg_volcano_common",
+      "biome_id": "volcano",
+      "name": "Trứng Rồng Lửa",
+      "name_en": "Fire Dragon Egg",
+      "value": 1000,
+      "hatch_time": 300.0,
+      "pet_id": "pet_dragon_fire",
+      "size": 32,
+      "color": "#e84020",
+      "carry_speed_penalty": 0.55
+    },
+    {
+      "id": "egg_volcano_rare",
+      "biome_id": "volcano",
+      "name": "Trứng Rồng Đen",
+      "name_en": "Black Dragon Egg",
+      "value": 1500,
+      "hatch_time": 360.0,
+      "pet_id": "pet_dragon_black",
+      "size": 38,
+      "color": "#2a1d2a",
+      "carry_speed_penalty": 0.45
+    },
+    {
+      "id": "egg_cosmos_common",
+      "biome_id": "cosmos",
+      "name": "Trứng Boss Vũ Trụ",
+      "name_en": "Cosmic Boss Egg",
+      "value": 2500,
+      "hatch_time": 420.0,
+      "pet_id": "pet_boss_cosmic",
+      "size": 40,
+      "color": "#9d4edd",
+      "carry_speed_penalty": 0.50
+    },
+    {
+      "id": "egg_cosmos_legendary",
+      "biome_id": "cosmos",
+      "name": "Trứng Huyền Thoại",
+      "name_en": "Legendary Egg",
+      "value": 5000,
+      "hatch_time": 600.0,
+      "pet_id": "pet_boss_legendary",
+      "size": 48,
+      "color": "#ffd700",
+      "carry_speed_penalty": 0.40
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://i5t6e7m8n9o0p1"]
+
+[ext_resource type="Script" path="res://scripts/ui/UpgradeItem.gd" id="1_upgrade_item"]
+
+[node name="UpgradeItem" type="Control" parent="."]
+custom_minimum_size = Vector2(740, 80)
+script = ExtResource("1_upgrade_item")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Info" type="VBoxContainer" parent="HBox"]
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(460, 0)
+
+[node name="NameLabel" type="Label" parent="HBox/Info"]
+text = "Upgrade Name"
+
+[node name="DescLabel" type="Label" parent="HBox/Info"]
+text = "Description here"
+add_theme_color_override("font_color", Color(0.7, 0.7, 0.7, 1))
+
+[node name="LevelLabel" type="Label" parent="HBox"]
+custom_minimum_size = Vector2(100, 0)
+text = "Lv 0/10"
+horizontal_alignment = 1
+
+[node name="BuyButton" type="Button" parent="HBox"]
+custom_minimum_size = Vector2(140, 40)
+text = "Mua"
+
+[node name="CostLabel" type="Label" parent="HBox/BuyButton"]
+visible = false
+text = "0 $"

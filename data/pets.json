@@ -1,0 +1,124 @@
+{
+  "pets": [
+    {
+      "id": "pet_goose",
+      "name": "Ngỗng Con",
+      "name_en": "Baby Goose",
+      "egg_id": "egg_playground_small",
+      "income_per_min": 10,
+      "color": "#f8f8f0",
+      "size": 20,
+      "description": "Sinh vật starter, cho thu nhập thấp nhưng ổn định."
+    },
+    {
+      "id": "pet_goose_golden",
+      "name": "Ngỗng Vàng",
+      "name_en": "Golden Goose",
+      "egg_id": "egg_playground_medium",
+      "income_per_min": 25,
+      "color": "#ffd700",
+      "size": 22,
+      "description": "Phiên bản vàng của ngỗng, đẻ nhiều tiền hơn."
+    },
+    {
+      "id": "pet_bear",
+      "name": "Gấu Con",
+      "name_en": "Baby Bear",
+      "egg_id": "egg_foreast_common",
+      "income_per_min": 60,
+      "color": "#a87544",
+      "size": 26,
+      "description": "Sinh vật rừng, thu nhập trung bình."
+    },
+    {
+      "id": "pet_bear_brown",
+      "name": "Gấu Nâu",
+      "name_en": "Brown Bear",
+      "egg_id": "egg_forest_medium",
+      "income_per_min": 90,
+      "color": "#6b4423",
+      "size": 30,
+      "description": "Phiên bản lớn, thu nhập cao hơn."
+    },
+    {
+      "id": "pet_bear_polar",
+      "name": "Gấu Polar",
+      "name_en": "Polar Bear",
+      "egg_id": "egg_forest_rare",
+      "income_per_min": 130,
+      "color": "#e0e8f0",
+      "size": 32,
+      "description": "Hiếm của rừng xanh, thu nhập cao."
+    },
+    {
+      "id": "pet_tiger",
+      "name": "Hổ Con",
+      "name_en": "Baby Tiger",
+      "egg_id": "egg_desert_common",
+      "income_per_min": 180,
+      "color": "#ff8c1a",
+      "size": 28,
+      "description": "Sinh vật sa mạc, thu nhập cao."
+    },
+    {
+      "id": "pet_tiger_white",
+      "name": "Hổ Trắng",
+      "name_en": "White Tiger",
+      "egg_id": "egg_desert_medium",
+      "income_per_min": 260,
+      "color": "#f0f0e0",
+      "size": 32,
+      "description": "Phiên bản trắng hiếm."
+    },
+    {
+      "id": "pet_tiger_saber",
+      "name": "Hổ Saber",
+      "name_en": "Saber Tiger",
+      "egg_id": "egg_desert_rare",
+      "income_per_min": 360,
+      "color": "#c8a060",
+      "size": 36,
+      "description": "Hổ nanh kiếm, hiếm và quý."
+    },
+    {
+      "id": "pet_dragon_fire",
+      "name": "Rồng Lửa",
+      "name_en": "Fire Dragon",
+      "egg_id": "egg_volcano_common",
+      "income_per_min": 500,
+      "color": "#e84020",
+      "size": 38,
+      "description": "Rồng núi lửa, thu nhập rất cao."
+    },
+    {
+      "id": "pet_dragon_black",
+      "name": "Rồng Đen",
+      "name_en": "Black Dragon",
+      "egg_id": "egg_volcano_rare",
+      "income_per_min": 750,
+      "color": "#2a1d2a",
+      "size": 44,
+      "description": "Rồng đen, cực kỳ quý hiếm."
+    },
+    {
+      "id": "pet_boss_cosmic",
+      "name": "Boss Vũ Trụ",
+      "name_en": "Cosmic Boss",
+      "egg_id": "egg_cosmos_common",
+      "income_per_min": 1200,
+      "color": "#9d4edd",
+      "size": 50,
+      "description": "Sinh vật vũ trụ, thu nhập khổng lồ."
+    },
+    {
+      "id": "pet_boss_legendary",
+      "name": "Huyền Thoại",
+      "name_en": "Legendary",
+      "egg_id": "egg_cosmos_legendary",
+      "income_per_min": 2500,
+      "color": "#ffd700",
+      "size": 60,
+      "description": "Sinh vật huyền thoại, phần thưởng xứng đáng cho người chơi kiên trì."
+    }
+  ]
+}

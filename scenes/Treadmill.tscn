@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://t7r3a4d5m6i7l8"]
+
+[ext_resource type="Script" path="res://scripts/base/Treadmill.gd" id="1_treadmill"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_treadmill"]
+size = Vector2(180, 80)
+
+[node name="Treadmill" type="Area2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_treadmill")
+
+[node name="BodySprite" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-90, -40, 90, -40, 90, 40, -90, 40)
+color = Color(0.3, 0.3, 0.32, 1)
+
+[node name="BeltSprite" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-80, -30, 80, -30, 80, 30, -80, 30)
+color = Color(0.15, 0.15, 0.18, 1)
+z_index = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_treadmill")
+
+[node name="PromptLabel" type="Label" parent="."]
+offset_left = -100.0
+offset_top = -70.0
+offset_right = 100.0
+offset_bottom = -50.0
+text = "MÁY CHẠY"
+horizontal_alignment = 1

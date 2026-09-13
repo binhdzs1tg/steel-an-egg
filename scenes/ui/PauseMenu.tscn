@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://p1a2u3s4e5m6e7"]
+
+[ext_resource type="Script" path="res://scripts/ui/PauseMenu.gd" id="1_pause_menu"]
+
+[node name="PauseMenu" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+process_mode = 3
+script = ExtResource("1_pause_menu")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 440.0
+offset_top = 200.0
+offset_right = 840.0
+offset_bottom = 520.0
+
+[node name="Title" type="Label" parent="Panel"]
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 384.0
+offset_bottom = 50.0
+text = "TAM DUNG"
+horizontal_alignment = 1
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+offset_left = 60.0
+offset_top = 70.0
+offset_right = 340.0
+offset_bottom = 300.0
+
+[node name="ResumeButton" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(280, 50)
+text = "Tiep Tuc [Esc]"
+
+[node name="SaveButton" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(280, 50)
+text = "Luu Game"
+
+[node name="QuitButton" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(280, 50)
+text = "Thoat Game"

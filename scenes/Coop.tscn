@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0o0p5e6g7h8i9"]
+
+[ext_resource type="Script" path="res://scripts/base/Coop.gd" id="1_coop"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_coop"]
+size = Vector2(500, 280)
+
+[node name="Coop" type="Area2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_coop")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_coop")

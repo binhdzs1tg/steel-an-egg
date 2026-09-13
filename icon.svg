@@ -1,0 +1,28 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="128" height="128" fill="#1a1d24"/>
+  
+  <!-- Egg body -->
+  <ellipse cx="64" cy="68" rx="34" ry="44" fill="#fef4d6" stroke="#d4a93a" stroke-width="3"/>
+  
+  <!-- Egg spots -->
+  <circle cx="52" cy="58" r="5" fill="#d4a93a"/>
+  <circle cx="74" cy="68" r="6" fill="#d4a93a"/>
+  <circle cx="60" cy="84" r="4" fill="#d4a93a"/>
+  <circle cx="78" cy="50" r="3" fill="#d4a93a"/>
+  
+  <!-- Shine -->
+  <ellipse cx="50" cy="50" rx="8" ry="14" fill="#fff" opacity="0.6"/>
+  
+  <!-- Hands stealing (left) -->
+  <path d="M 8 70 Q 24 64 36 72 Q 32 80 22 78 Q 12 80 8 76 Z" fill="#e8b87a" stroke="#a06a2e" stroke-width="2"/>
+  
+  <!-- Hands stealing (right) -->
+  <path d="M 120 70 Q 104 64 92 72 Q 96 80 106 78 Q 116 80 120 76 Z" fill="#e8b87a" stroke="#a06a2e" stroke-width="2"/>
+  
+  <!-- Sparkles -->
+  <g fill="#ffd966">
+    <path d="M 20 30 L 22 36 L 28 38 L 22 40 L 20 46 L 18 40 L 12 38 L 18 36 Z"/>
+    <path d="M 108 30 L 110 36 L 116 38 L 110 40 L 108 46 L 106 40 L 100 38 L 106 36 Z"/>
+  </g>
+</svg>

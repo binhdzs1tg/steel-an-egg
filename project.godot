@@ -1,0 +1,102 @@
+;
+; Steal An Egg Simulator — Godot 4.3 project
+; 2D Top-Down Egg Stealing Game
+;
+; Engine: Godot 4.3.stable
+; Script: GDScript
+;
+[application]
+
+config/name="Steal An Egg Simulator"
+config/description="2D Top-Down Egg Stealing Simulator. Steal eggs, raise pets, earn money, upgrade, expand."
+run/main_scene="res://scenes/Main.tscn"
+config/features=StringArray("4.3", "GL Compatibility")
+config/icon="res://icon.svg"
+config/version="1.0.0"
+config/windows_native_icon="res://icon.ico"
+
+[autoload]
+
+DataRegistry="*res://scripts/autoload/DataRegistry.gd"
+GameManager="*res://scripts/autoload/GameManager.gd"
+Economy="*res://scripts/autoload/Economy.gd"
+SaveSystem="*res://scripts/autoload/SaveSystem.gd"
+AudioManager="*res://scripts/autoload/AudioManager.gd"
+NotificationSystem="*res://scripts/autoload/NotificationSystem.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+window/handheld/orientation=0
+
+[input]
+
+move_up={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"keycode":87,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+]
+}
+move_down={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"keycode":83,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+]
+}
+move_left={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"keycode":65,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+]
+}
+move_right={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"keycode":68,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"alt":false,"shift":false,"command":false)
+]
+}
+interact={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"keycode":69,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+]
+}
+run={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"keycode":4194325,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+]
+}
+pause={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"keycode":4194305,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+]
+}
+upgrade_menu={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"keycode":85,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+]
+}
+toggle_minimap={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"keycode":77,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"pressed":false,"command":false,"ctrl":false,"alt":false,"shift":false)
+]
+}
+
+[layer_names]
+
+2d_render/layer_1="World"
+2d_render/layer_2="Player"
+2d_render/layer_3="Eggs"
+2d_render/layer_4="Guardians"
+2d_render/layer_5="UI"
+
+[physics]
+
+common/physics_ticks_per_second=60
+2d/default_gravity=0.0
+
+[rendering]
+
+renderer="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.12, 0.13, 0.17, 1)
+textures/canvas_textures/default_texture_filter=0

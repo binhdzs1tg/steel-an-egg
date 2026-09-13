@@ -1,0 +1,132 @@
+[gd_scene load_steps=4 format=3 uid="uid://h4u5d6f7g8h9j0"]
+
+[ext_resource type="Script" path="res://scripts/ui/HUD.gd" id="1_hud"]
+[ext_resource type="Script" path="res://scripts/ui/Minimap.gd" id="2_minimap"]
+[ext_resource type="PackedScene" path="res://scenes/ui/UpgradeMenu.tscn" id="3_upgrade_menu"]
+
+[node name="HUD" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_hud")
+
+[node name="Root" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopBar" type="HBoxContainer" parent="Root"]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 1268.0
+offset_bottom = 60.0
+
+[node name="DayLabel" type="Label" parent="Root/TopBar"]
+custom_minimum_size = Vector2(150, 0)
+text = "Ngay 1"
+
+[node name="Spacer1" type="Control" parent="Root/TopBar"]
+custom_minimum_size = Vector2(20, 0)
+
+[node name="CarryIndicator" type="Label" parent="Root/TopBar"]
+custom_minimum_size = Vector2(300, 0)
+text = ""
+
+[node name="Spacer2" type="Control" parent="Root/TopBar"]
+size_flags_horizontal = 3
+
+[node name="UpgradeButton" type="Button" parent="Root/TopBar"]
+custom_minimum_size = Vector2(180, 44)
+text = "Nang Cap [U]"
+
+[node name="BottomBar" type="HBoxContainer" parent="Root"]
+offset_left = 12.0
+offset_top = 660.0
+offset_right = 1268.0
+offset_bottom = 712.0
+
+[node name="SpeedPanel" type="Panel" parent="Root/BottomBar"]
+custom_minimum_size = Vector2(200, 50)
+
+[node name="SpeedLabel" type="Label" parent="Root/BottomBar/SpeedPanel"]
+offset_left = 12.0
+offset_top = 6.0
+offset_right = 100.0
+offset_bottom = 24.0
+text = "Speed:"
+
+[node name="SpeedValue" type="Label" parent="Root/BottomBar/SpeedPanel"]
+offset_left = 100.0
+offset_top = 6.0
+offset_right = 188.0
+offset_bottom = 24.0
+text = "0"
+
+[node name="Spacer3" type="Control" parent="Root/BottomBar"]
+custom_minimum_size = Vector2(16, 0)
+
+[node name="MoneyPanel" type="Panel" parent="Root/BottomBar"]
+custom_minimum_size = Vector2(200, 50)
+
+[node name="MoneyLabel" type="Label" parent="Root/BottomBar/MoneyPanel"]
+offset_left = 12.0
+offset_top = 6.0
+offset_right = 100.0
+offset_bottom = 24.0
+text = "Money:"
+
+[node name="MoneyValue" type="Label" parent="Root/BottomBar/MoneyPanel"]
+offset_left = 100.0
+offset_top = 6.0
+offset_right = 188.0
+offset_bottom = 24.0
+text = "0 $"
+
+[node name="Spacer4" type="Control" parent="Root/BottomBar"]
+custom_minimum_size = Vector2(16, 0)
+
+[node name="RunButton" type="Button" parent="Root/BottomBar"]
+custom_minimum_size = Vector2(140, 44)
+text = "Chay [Shift]"
+
+[node name="Spacer5" type="Control" parent="Root/BottomBar"]
+size_flags_horizontal = 3
+
+[node name="Center" type="CenterContainer" parent="Root"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -100.0
+offset_right = 400.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PromptLabel" type="Label" parent="Root/Center"]
+custom_minimum_size = Vector2(800, 60)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChaseIndicator" type="Label" parent="Root/Center"]
+custom_minimum_size = Vector2(800, 60)
+text = "BI TRUY DUOI! CHAY VE CAN CU!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Minimap" type="Control" parent="Root"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_top = 80.0
+offset_right = -20.0
+offset_bottom = 360.0
+grow_horizontal = 0
+script = ExtResource("2_minimap")
+
+[node name="UpgradeMenu" parent="Root" instance=ExtResource("3_upgrade_menu")]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://e3g2c3n4t5r6y"]
+
+[ext_resource type="Script" path="res://scripts/egg/Egg.gd" id="1_egg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_egg"]
+radius = 20.0
+
+[node name="Egg" type="Area2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_egg")
+
+[node name="GlowSprite" type="Polygon2D" parent="."]
+color = Color(1, 0.9, 0.6, 0.3)
+z_index = 1
+
+[node name="EggSprite" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-7, -10, 7, -10, 9, 0, 7, 10, -7, 10, -9, 0)
+color = Color(1, 0.95, 0.7, 1)
+z_index = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_egg")
