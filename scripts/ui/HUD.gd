@@ -93,7 +93,7 @@ func _setup_ui() -> void:
 
         # Camera mode indicator (bottom-left)
         mode_label = Label.new()
-        mode_label.position = Vector2(20, 660)
+        mode_label.position = Vector2(20, 656)
         mode_label.text = "[3P Classic] Hold RMB to rotate | Shift to lock | Scroll in for 1P"
         mode_label.add_theme_font_size_override("font_size", 13)
         mode_label.add_theme_color_override("font_color", Color(0.9, 0.9, 0.9))
@@ -103,7 +103,7 @@ func _setup_ui() -> void:
 
         # Bottom-center: controls help (compact)
         var help_label := Label.new()
-        help_label.position = Vector2(20, 690)
+        help_label.position = Vector2(20, 678)
         help_label.text = "WASD Move | Space Jump | E Interact | I Inventory | C Collection | U Upgrades | Q Quests"
         help_label.add_theme_font_size_override("font_size", 12)
         help_label.add_theme_color_override("font_color", Color(0.7, 0.85, 1.0))
@@ -114,7 +114,7 @@ func _setup_ui() -> void:
         # Notification container (center-right, stacks downward)
         notification_container = VBoxContainer.new()
         notification_container.name = "Notifications"
-        notification_container.position = Vector2(960, 100)
+        notification_container.position = Vector2(960, 80)
         notification_container.size = Vector2(300, 400)
         notification_container.add_theme_constant_override("separation", 8)
         add_child(notification_container)
@@ -333,6 +333,12 @@ func _on_pet_inventory_changed() -> void:
 
 # ---------- Notifications ----------
 func show_notification(text: String, icon: String, duration: float) -> void:
+        # Cap concurrent toasts: drop the oldest when flooding (previously the
+        # container could stack unbounded and cover the screen).
+        while notification_container.get_child_count() >= 6:
+                var oldest := notification_container.get_child(0)
+                notification_container.remove_child(oldest)
+                oldest.queue_free()
         var toast := Panel.new()
         toast.custom_minimum_size = Vector2(280, 36)
         var style := StyleBoxFlat.new()

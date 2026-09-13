@@ -1,15 +1,27 @@
 extends Control
 ## Minimap
 ## A small 2D top-down map in the corner showing: player, base, biome gates, nearby eggs.
-## Updates every frame from world positions.
+##
+## FIXES:
+##   - The canvas was connected to draw() but queue_redraw() was never called,
+##     so the minimap only rendered once and then froze (graphics bug).
+##     It now redraws at 10 Hz — cheap and smooth enough for a minimap.
+##   - Moved to the bottom-right corner; it used to overlap the Activity Log
+##     (both were placed at position 20,460).
+##   - Script preloads are cached in constants instead of re-resolving inside
+##     the draw loop, and invalid/freed nodes are guarded.
 
 const MAP_SIZE: float = 180.0
 const WORLD_RADIUS: float = 120.0  # how many world units fit in the minimap radius
+const REDRAW_INTERVAL: float = 0.1
+const CHAIN: Array = ["grassland", "forest", "desert", "snow", "volcano", "crystal_cave", "sky_island", "void"]
+
+const EGG_SPAWN_SCRIPT: GDScript = preload("res://scripts/world/EggSpawnPoint.gd")
+const NPC_SCRIPT: GDScript = preload("res://scripts/npc/NPC.gd")
 
 var bg: Panel
 var canvas: Control
-var player_marker: ColorRect
-var base_marker: ColorRect
+var _redraw_timer: float = 0.0
 
 
 func _setup_ui() -> void:
@@ -17,7 +29,7 @@ func _setup_ui() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	bg = Panel.new()
-	bg.position = Vector2(20, 460)
+	bg.position = Vector2(1060, 495)
 	bg.size = Vector2(MAP_SIZE, MAP_SIZE)
 	var style := StyleBoxFlat.new()
 	style.bg_color = Color(0.05, 0.1, 0.2, 0.85)
@@ -51,11 +63,12 @@ func _setup_ui() -> void:
 	canvas.draw.connect(_on_draw)
 	bg.add_child(canvas)
 
-	# Center marker for base
-	base_marker = ColorRect.new()
-	base_marker.color = Color(0.6, 1.0, 0.6)
-	base_marker.size = Vector2(6, 6)
-	bg.add_child(base_marker)
+
+func _process(delta: float) -> void:
+	_redraw_timer -= delta
+	if _redraw_timer <= 0.0:
+		_redraw_timer = REDRAW_INTERVAL
+		canvas.queue_redraw()
 
 
 func _on_draw() -> void:
@@ -75,9 +88,7 @@ func _on_draw() -> void:
 
 	# Draw biome gates (north of each biome)
 	for biome_id in GameManager.get_data().get("unlocked_biomes", []):
-		# We don't have a direct world-pos lookup; estimate using chain position
-		var chain := ["grassland", "forest", "desert", "snow", "volcano", "crystal_cave", "sky_island", "void"]
-		var idx: int = chain.find(biome_id)
+		var idx: int = CHAIN.find(biome_id)
 		if idx < 0:
 			continue
 		var biome_z: float = -220.0 * (idx + 1)
@@ -91,34 +102,37 @@ func _on_draw() -> void:
 
 	# Draw nearby eggs (within WORLD_RADIUS)
 	var world_root: Node = GameManager._world_root
-	if world_root:
+	if world_root and is_instance_valid(world_root):
 		for biome in world_root.get_children():
-			if biome.has_method("get") and biome.get("biome_id") != null:
-				for sp in biome.get_children():
-					if sp.get_script() == preload("res://scripts/world/EggSpawnPoint.gd"):
-						if sp.current_egg != null and is_instance_valid(sp.current_egg):
-							var egg_world: Vector3 = sp.current_egg.global_position
-							var rel := Vector2(egg_world.x, egg_world.z) - Vector2(player_pos.x, player_pos.z)
-							var mp := center + rel / WORLD_RADIUS * (center.x - 8)
-							if mp.distance_to(center) < center.x - 6:
-								canvas.draw_circle(mp, 2, Color(1.0, 0.7, 0.4))
+			if not is_instance_valid(biome):
+				continue
+			for sp in biome.get_children():
+				if not is_instance_valid(sp) or sp.get_script() != EGG_SPAWN_SCRIPT:
+					continue
+				if sp.current_egg != null and is_instance_valid(sp.current_egg):
+					var egg_world: Vector3 = sp.current_egg.global_position
+					var rel := Vector2(egg_world.x, egg_world.z) - Vector2(player_pos.x, player_pos.z)
+					var mp := center + rel / WORLD_RADIUS * (center.x - 8)
+					if mp.distance_to(center) < center.x - 6:
+						canvas.draw_circle(mp, 2, Color(1.0, 0.7, 0.4))
 
-	# Draw NPCs (red dots) within range
-	if world_root:
+		# Draw NPCs (red dots) within range
 		for biome in world_root.get_children():
-			if biome.has_method("get") and biome.get("biome_id") != null:
-				for npc in biome.get_children():
-					if npc.get_script() == preload("res://scripts/npc/NPC.gd"):
-						var npc_world: Vector3 = npc.global_position
-						var rel := Vector2(npc_world.x, npc_world.z) - Vector2(player_pos.x, player_pos.z)
-						var mp := center + rel / WORLD_RADIUS * (center.x - 8)
-						if mp.distance_to(center) < center.x - 6:
-							var color: Color = Color(1.0, 0.3, 0.3)
-							if npc.state == npc.State.CHASE:
-								color = Color(1.0, 0.1, 0.1)
-							elif npc.state == npc.State.ATTACK:
-								color = Color(1.0, 0.0, 0.0)
-							canvas.draw_circle(mp, 2.5, color)
+			if not is_instance_valid(biome):
+				continue
+			for npc in biome.get_children():
+				if not is_instance_valid(npc) or npc.get_script() != NPC_SCRIPT:
+					continue
+				var npc_world: Vector3 = npc.global_position
+				var rel := Vector2(npc_world.x, npc_world.z) - Vector2(player_pos.x, player_pos.z)
+				var mp := center + rel / WORLD_RADIUS * (center.x - 8)
+				if mp.distance_to(center) < center.x - 6:
+					var color: Color = Color(1.0, 0.3, 0.3)
+					if npc.state == npc.State.CHASE:
+						color = Color(1.0, 0.1, 0.1)
+					elif npc.state == npc.State.ATTACK:
+						color = Color(1.0, 0.0, 0.0)
+					canvas.draw_circle(mp, 2.5, color)
 
 	# Draw player at center (always)
 	canvas.draw_circle(center, 4, Color(0.4, 0.85, 1.0))

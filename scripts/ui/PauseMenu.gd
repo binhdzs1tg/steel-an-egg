@@ -18,6 +18,12 @@ func _setup_ui() -> void:
         # Note: PauseMenu extends CanvasLayer (not Control), so anchors/mouse_filter
         # are set on the bg_panel child instead, which is a Control.
 
+        # CRITICAL FIX: process_mode ALWAYS. When the tree is paused
+        # (get_tree().paused = true), every node with PROCESS_MODE_INHERIT stops
+        # receiving input — including this menu's own Esc handler and its buttons.
+        # The game previously became un-stuck only by quitting.
+        process_mode = Node.PROCESS_MODE_ALWAYS
+
         bg_panel = Panel.new()
         bg_panel.set_anchors_preset(Control.PRESET_FULL_RECT)
         bg_panel.mouse_filter = Control.MOUSE_FILTER_STOP
