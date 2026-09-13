@@ -16,7 +16,8 @@ func _ready() -> void:
                 _by_id[a["id"]] = a
         if not _data.has("achievements"):
                 _data["achievements"] = []
-        SaveSystem.mark_dirty()
+        # NOTE: no SaveSystem.mark_dirty() here — booting the game should not
+        # dirty the save file by itself.
 
 
 func is_unlocked(achievement_id: String) -> bool:

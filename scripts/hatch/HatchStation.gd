@@ -188,11 +188,10 @@ func _spawn_pet_visual() -> void:
         # Pre-roll the pet now so visual matches the result
         var pet_data := _roll_pet_from_egg(current_hatch_egg)
         visual_pet = PetVisual.new()
-        visual_pet.set_script(preload("res://scripts/pet/PetVisual.gd"))
         visual_pet.position = Vector3(0, 1.0, 0)
         add_child(visual_pet)
-        await get_tree().process_frame
-        # Build visual data
+        # _ready() ran during add_child(), so set_pet_data is safe to call now
+        # (the old code waited a whole frame for no reason).
         var visual_data := {
                 "model_type": pet_data.get("model_type", "small_quad"),
                 "color": pet_data.get("color", "#FFFFFF"),

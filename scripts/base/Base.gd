@@ -34,14 +34,13 @@ func _build_nodes() -> void:
         add_child(floor_body)
 
         # Hatch station at north
+        # (class_name instances already carry their script — no set_script needed)
         var hatch := HatchStation.new()
-        hatch.set_script(preload("res://scripts/hatch/HatchStation.gd"))
         hatch.position = Vector3(0, 0.1, -4.0)
         add_child(hatch)
 
         # Treadmill
         var tread := Treadmill.new()
-        tread.set_script(preload("res://scripts/base/Treadmill.gd"))
         tread.position = Vector3(-3.5, 0.1, 2.0)
         add_child(tread)
 
@@ -49,7 +48,6 @@ func _build_nodes() -> void:
         var upgrades := ["speed", "treadmill", "pet_slots", "egg_storage", "base", "income_boost"]
         for i in range(upgrades.size()):
                 var up := UpgradeStation.new()
-                up.set_script(preload("res://scripts/upgrade/UpgradeStation.gd"))
                 up.upgrade_id = upgrades[i]
                 var angle := TAU * float(i) / float(upgrades.size())
                 var radius := 6.0
@@ -58,7 +56,6 @@ func _build_nodes() -> void:
 
         # Pet Display Area (center of base)
         var display := PetDisplayArea.new()
-        display.set_script(preload("res://scripts/base/PetDisplayArea.gd"))
         display.position = Vector3(0, 0.1, 4.0)
         add_child(display)
 

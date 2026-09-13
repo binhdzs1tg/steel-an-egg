@@ -28,7 +28,12 @@ func _ready() -> void:
 
 func load_all_data() -> void:
         _eggs = _load_json("res://data/eggs.json")
-        _pets = _load_json("res://data/pets.json")
+        # BUGFIX: pets.json wraps its entries under the "pets" key. The registry
+        # previously stored the RAW json, so get_pet(id) / get_all_pets() always
+        # missed — hatching produced empty pets (no name, no income) and the
+        # Collection index stayed broken.
+        var pets_data := _load_json("res://data/pets.json")
+        _pets = pets_data.get("pets", pets_data)
         var biomes_data := _load_json("res://data/biomes.json")
         _biomes = biomes_data.get("biomes", {})
         _npcs = biomes_data.get("npcs", {})
@@ -48,7 +53,7 @@ func load_all_data() -> void:
         _loaded = true
         data_loaded.emit()
         print("[DataRegistry] Loaded %d eggs, %d pets, %d biomes, %d upgrades, %d quests, %d achievements" % [
-                _eggs.size(), _pets.size(), _biomes.size(), _upgrades.size(), _quests.size(), _achievements.size()
+                _eggs.size(), _pets.size(), _biomes.size(), get_all_upgrade_defs().size(), _quests.size(), _achievements.size()
         ])
 
 
@@ -98,6 +103,11 @@ func get_upgrade_def(upgrade_id: String) -> Dictionary:
         # 'upgrades' wraps definitions under 'upgrades' key
         var u: Dictionary = _upgrades.get("upgrades", {})
         return u.get(upgrade_id, {})
+
+
+func get_all_upgrade_defs() -> Dictionary:
+        # Returns the whole {upgrade_id: definition} map (cached at boot).
+        return _upgrades.get("upgrades", {})
 
 func get_quests() -> Array:
         return _quests

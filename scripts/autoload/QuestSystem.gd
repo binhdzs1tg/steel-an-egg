@@ -86,17 +86,22 @@ func is_quest_available(quest_id: String) -> bool:
 
 func progress_objective(objective_type: String, current_value: int) -> void:
         # For accumulating objectives (earn_money, reach_speed): we set current to the value directly
+        var changed := false
         for s in get_quest_states():
                 if bool(s.get("claimed", false)):
                         continue
                 for o in s.get("objectives", []):
                         if o["type"] == objective_type:
-                                o["current"] = current_value
+                                if int(o.get("current", 0)) != current_value:
+                                        o["current"] = current_value
+                                        changed = true
                                 _check_quest_complete(s)
-        quest_updated.emit("", false)
+        if changed:
+                quest_updated.emit("", false)
 
 func increment_objective(objective_type: String, amount: int = 1, biome: String = "", rarity: String = "") -> void:
         # For counting objectives (collect_egg, hatch_pet)
+        var changed := false
         for s in get_quest_states():
                 if bool(s.get("claimed", false)):
                         continue
@@ -111,8 +116,10 @@ func increment_objective(objective_type: String, amount: int = 1, biome: String 
                                 if actual_tier < required_tier:
                                         continue
                         o["current"] = int(o.get("current", 0)) + amount
+                        changed = true
                         _check_quest_complete(s)
-        quest_updated.emit("", false)
+        if changed:
+                quest_updated.emit("", false)
 
 func _check_quest_complete(state: Dictionary) -> void:
         var all_done := true

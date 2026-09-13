@@ -193,22 +193,28 @@ func _pet_level_multiplier(level: int) -> float:
                 return table[level - 1]
         return table[-1] * pow(1.5, level - table.size())
 
-# Called by GameManager's process tick to accumulate income
-var _income_accumulator: float = 0.0
+# Called by GameManager's tick every frame (cheap float math only);
+# the actual add_money() flush happens batched in GameManager's 4 Hz tick.
+# Returns the income earned this frame so the caller can batch it.
 var _money_tick_sound_timer: float = 0.0
+var _last_emitted_income: int = -1
 const MONEY_TICK_SOUND_INTERVAL: float = 1.5
 
-func tick_income(delta: float) -> void:
+func accumulate_income(delta: float) -> float:
         var rate := get_pet_income_per_second()
-        if rate <= 0:
-                return
-        _income_accumulator += rate * delta
-        while _income_accumulator >= 1.0:
-                add_money(1)
-                _income_accumulator -= 1.0
         # Play a subtle money tick sound every ~1.5s if income > 0
         _money_tick_sound_timer += delta
         if _money_tick_sound_timer >= MONEY_TICK_SOUND_INTERVAL:
                 _money_tick_sound_timer = 0.0
-                AudioManager.play_sfx("money_tick")
-        pet_income_changed.emit(rate)
+                if rate > 0:
+                        AudioManager.play_sfx("money_tick")
+        return rate * delta
+
+
+# Emits pet_income_changed ONLY when the rate actually changed
+# (previously this emitted 60x per second, re-rendering the HUD label).
+func emit_income_rate() -> void:
+        var rate := get_pet_income_per_second()
+        if rate != _last_emitted_income:
+                _last_emitted_income = rate
+                pet_income_changed.emit(rate)
